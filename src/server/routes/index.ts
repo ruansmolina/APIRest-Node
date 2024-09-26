@@ -4,15 +4,12 @@ import { StatusCodes } from 'http-status-codes';
 import { CidadeController } from "../controllers/cidades";
 const router = Router();
 
-router.get('/', (req, res) => {
-    console.log(req.url);
-    return res.send('Get Request');
-});
+router.get('/', CidadeController.getAllValidation,CidadeController.getAll);
 
-router.post('/', CidadeController.create); 
+router.post('/',CidadeController.createValidation, CidadeController.create); 
 
 router.put('/', (req, res) => {
-    return res.send('Put Request');
+    return res.status(StatusCodes.OK).send('Put Request');
 });
 
 router.delete('/:id', (req, res) => {

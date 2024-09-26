@@ -1,31 +1,21 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from 'yup';
+import { validation } from "../../middleware/Validation";
+
 export interface iCidade{
-    name:string,uf:string
+    name:string
 }
 const schema :yup.Schema<iCidade>= yup.object().shape({
-    name: yup.string().required().min(3),
-    uf:yup.string().required()
+    name: yup.string().required().min(3)
 });
-export const create = async (req:Request<{},{},iCidade>,res:Response)  =>  {
-    const body = req.body;
-   let validateData:iCidade | undefined = undefined;
-   try {
-    validateData = await  schema.validate(body,{abortEarly:false});
 
-   } catch (error) {
-    const yupError = error as yup.ValidationError;
-    const validateErrors: Record<string,string>={};
-    console.log(yupError.errors)
-    yupError.inner.forEach((error)=>{
-        if(!error.path) return;
-        validateErrors[error.path ] = error.message;
-    })
-    return res.status(StatusCodes.BAD_REQUEST).json({
-        errors: validateErrors
-    });
-   }
-   res.status(StatusCodes.CREATED).send(validateData);
+export const createValidation = validation((getSchema)=>({
+    body:getSchema<iCidade>(schema),
+    query:getSchema<iCidade>(schema)
+}));
+export const create = async (req:Request<{},{},iCidade>,res:Response)  =>  {
+    
+    res.status(StatusCodes.CREATED).send("Create Request");
 };
