@@ -12,8 +12,7 @@ const schema :yup.Schema<iCidade>= yup.object().shape({
 });
 
 export const createValidation = validation((getSchema)=>({
-    body:getSchema<iCidade>(schema),
-    query:getSchema<iCidade>(schema)
+    body:getSchema<iCidade>(schema)
 }));
 export const create = async (req:Request<{},{},iCidade>,res:Response)  =>  {
     
