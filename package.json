@@ -10,9 +10,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/jest": "^29.5.13",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "http-status-codes": "^2.3.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "yup": "^1.4.0"
   },
   "devDependencies": {
