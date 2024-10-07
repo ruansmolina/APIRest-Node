@@ -2,3 +2,4 @@
 .env
 eslint.config.mjs
 .editorconfig
+/coverage
