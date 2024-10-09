@@ -9,12 +9,12 @@ describe('Cidade - create', ()=>{
 
         expect(StatusCodes.CREATED).toEqual(resp.statusCode);
     });
+
     it('Criar um registro - fracasso - falta de caracteres',async ()  => {
 
         const resp = await testServer.post('/').send({name:'JU'});
 
         expect(StatusCodes.BAD_REQUEST).toEqual(resp.statusCode);
-        console.log(resp.body)
         expect(resp.body).toHaveProperty('errors.body.name');
     });
 });
